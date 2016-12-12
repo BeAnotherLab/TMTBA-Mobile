@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/L2_Network.unity
+  isLoaded: 1
+  isActive: 1
