@@ -14,11 +14,12 @@ public class LoadDalva : MonoBehaviour {
 	}
 
 	public void Load () {
-		PlayerPrefs.SetString ("Video", "file:///storage/emulated/0/Download/edition_DALVA_1080p.mkv");
-		//PlayerPrefs.SetString ("Video", "file:///storage/emulated/0/Phobia360_injected.mp4");
-		//PlayerPrefs.SetString ("Video2", "edition_DALVA_1080p.mkv");
+		//PlayerPrefs.SetString ("VideoUsuario", "file:///storage/emulated/0/edition_DALVA_4K.mkv");
+		//PlayerPrefs.SetString ("Video", "file:///storage/sdcard0/edition_DALVA_4K.mp4");
+		//PlayerPrefs.SetString ("Video", "file:///storage/emulated/0/edition_DALVA_4K.mkv");
+
+		PlayerPrefs.SetString ("Video", "Dalva");
 		PlayerPrefs.SetInt("Assistente", 1);
-		//PlayerPrefs.SetInt ("Desktop", 1);
 		Application.LoadLevel ("PlayerAssistente");
 	}
 }

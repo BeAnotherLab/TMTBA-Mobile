@@ -50,7 +50,9 @@ static void* _ObservePlayerItemContext = (void*)0x2;
     AVPlayerItemVideoOutput*    videoOutput;
 
     CMSampleBufferRef           _cmSampleBuffer;
+    CMSampleBufferRef           _cmSampleBuffer2;
     CMVideoSampling             _videoSampling;
+    CMVideoSampling             _videoSamplingDummy;
     
     unsigned int _videoTexture;
 
@@ -107,6 +109,15 @@ static void* _ObservePlayerItemContext = (void*)0x2;
     return self;
 }
 
+
+- (void)cleanCache
+{
+    if(_videoSamplingDummy.cvTextureCache)
+    {
+        CFRelease(_videoSamplingDummy.cvTextureCache);
+        _videoSamplingDummy.cvTextureCache = 0;
+    }
+}
 - (void)cleanupCVTextureCache
 {
     if(_cmSampleBuffer)
@@ -114,7 +125,38 @@ static void* _ObservePlayerItemContext = (void*)0x2;
         CFRelease(_cmSampleBuffer);
         _cmSampleBuffer = 0;
     }
-    CMVideoSampling_Uninitialize(&_videoSampling);
+    
+    if(_cmSampleBuffer2)
+    {
+        CFRelease(_cmSampleBuffer2);
+        _cmSampleBuffer2 = 0;
+    }
+    
+    if(_videoSampling.cvImageBuffer)
+    {
+        CFRelease(_videoSampling.cvImageBuffer);
+        _videoSampling.cvImageBuffer = 0;
+    }
+    if(_videoSampling.cvTextureCacheTexture)
+    {
+        CFRelease(_videoSampling.cvTextureCacheTexture);
+        _videoSampling.cvTextureCacheTexture = 0;
+    }
+   
+    
+    
+    if(_videoSampling.cvTextureCache !=0)
+    {
+        if(_videoSamplingDummy.cvTextureCache)
+        {
+            CFRelease(_videoSamplingDummy.cvTextureCache);
+            _videoSamplingDummy.cvTextureCache = 0;
+        }
+        _videoSamplingDummy.cvTextureCache = _videoSampling.cvTextureCache;
+        _videoSampling.cvTextureCache = 0;
+    }
+    
+    //CMVideoSampling_Uninitialize(&_videoSampling);
 }
 
 - (void)cleanupAssetReader
@@ -208,10 +250,24 @@ static void* _ObservePlayerItemContext = (void*)0x2;
     return YES;
 }
 
+- (BOOL)_playloop:(CustomVideoPlayerView*)view
+{
+    if(!_playerReady)
+        return NO;
+    
+    
+    // do not do seekTo and setRate here, it seems that http streaming may hang sometimes if you do so. go figure
+    _curFrameTimestamp = _lastFrameTimestamp = kCMTimeZero;
+    [_player play];
+    
+    return YES;
+}
+
 - (void)setTextureID:(intptr_t)id { _textureID = id;}
 
 - (BOOL)playToView:(CustomVideoPlayerView*)view   { return [self _play:view]; }
 - (BOOL)playToTexture                       { return [self _play:nil]; }
+- (BOOL)playToTextureloop                       { return [self _playloop:nil]; }
 
 - (BOOL)isPlaying	{ return _playerReady && _player.rate != 0.0f; }
 - (BOOL)getError           { return _error;}
@@ -226,12 +282,16 @@ static void* _ObservePlayerItemContext = (void*)0x2;
 {
     
     
-    [_player seekToTime: time
-        toleranceBefore: kCMTimeZero
-         toleranceAfter: kCMTimeZero
-      completionHandler: ^(BOOL finished)   {
-          //
-      }];
+    if (!CMTIME_IS_INVALID(time)) {
+        
+        [_player seekToTime: time
+            toleranceBefore: kCMTimeZero
+             toleranceAfter: kCMTimeZero
+          completionHandler: ^(BOOL finished)   {
+              //
+          }];
+    }
+    
     [self prepareReaderPos:time];
     _curFrameTimestamp = _lastFrameTimestamp = time;
     
@@ -252,11 +312,14 @@ static void* _ObservePlayerItemContext = (void*)0x2;
 		return curTex;
 
         
-
- 
-
+        if(_AudioRouteWasChanged )
+        {
+            _AudioRouteWasChanged = false;
+            [_player setRate: 1.0f]; // _player.rate = 1.0f;
+        }
+        
         _curTime = time;
-
+        
         unsigned char* pixelBufferBaseAddress = NULL;
         CVPixelBufferRef pixelBuffer;
         
@@ -268,22 +331,22 @@ static void* _ObservePlayerItemContext = (void*)0x2;
         pixelBufferBaseAddress = (unsigned char*)CVPixelBufferGetBaseAddress(pixelBuffer);
         size_t w = CVPixelBufferGetWidth( pixelBuffer);
         size_t h = CVPixelBufferGetHeight( pixelBuffer);
-      
+        
         CGSize size = CGSizeMake(w, h);
-       
+        
         if( _videoSize.width != size.width)
         {
             _videoSize = size;
-          
+            
         }
         
-    
+        
         
         if (NULL != pixelBufferBaseAddress)
         {
-
             
-           if(UnitySelectedRenderingAPI() == apiMetal || UnitySelectedRenderingAPI() == apiOpenGLES3 || UnitySelectedRenderingAPI() == apiOpenGLES2)
+            
+            if(UnitySelectedRenderingAPI() == apiMetal || UnitySelectedRenderingAPI() == apiOpenGLES3 || UnitySelectedRenderingAPI() == apiOpenGLES2)
             {
                 if(_videoSampling.cvTextureCacheTexture)
                 {
@@ -294,7 +357,7 @@ static void* _ObservePlayerItemContext = (void*)0x2;
                 if(_videoSampling.cvTextureCacheTexture)
                     curTex = GetTextureFromCVTextureCache(_videoSampling.cvTextureCacheTexture);
                 
-
+                
                 if(UnitySelectedRenderingAPI() == apiOpenGLES2 || UnitySelectedRenderingAPI() == apiOpenGLES3)
                 {
                     (glBindTexture(GL_TEXTURE_2D, (GLuint)curTex));
@@ -307,7 +370,7 @@ static void* _ObservePlayerItemContext = (void*)0x2;
                 
                 CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
                 
-               // curTex = retTex;
+                // curTex = retTex;
             }
             else
             {
@@ -353,8 +416,8 @@ static void* _ObservePlayerItemContext = (void*)0x2;
                 
                 curTex = _videoTexture;
             }
-           
-          
+            
+            
         }
         
         if (pixelBuffer) {
@@ -362,50 +425,68 @@ static void* _ObservePlayerItemContext = (void*)0x2;
         }
         
         return curTex;
-
+        
     }
     else
     {
-    if(!_reader)
-        return 0;
-
-    intptr_t curTex = CMVideoSampling_LastSampledTexture(&_videoSampling);
-
-    CMTime time = [_player currentTime];
-    if(CMTimeCompare(time, _curTime) == 0 || _reader.status != AVAssetReaderStatusReading)
-        return curTex;
-
-    _curTime = time;
-    while(_reader.status == AVAssetReaderStatusReading && CMTimeCompare(_curFrameTimestamp, _curTime) <= 0)
-    {
-        if(_cmSampleBuffer)
-            CFRelease(_cmSampleBuffer);
-
-        // TODO: properly handle ending
-    
-        _cmSampleBuffer = [_videoOut copyNextSampleBuffer];
-        if(_cmSampleBuffer == 0)
-        {
-            //[self cleanupCVTextureCache];
+        if(!_reader)
             return 0;
+        
+     
+        
+
+        intptr_t curTex = CMVideoSampling_LastSampledTexture(&_videoSampling);
+        
+        CMTime time = [_player currentTime];
+        if(CMTimeCompare(time, _curTime) == 0 || _reader.status != AVAssetReaderStatusReading)
+            return curTex;
+        
+        
+        
+        // if we have changed audio route and due to current category apple decided to pause playback - resume automatically
+        if(_AudioRouteWasChanged )
+        {
+            _AudioRouteWasChanged = false;
+            [_player setRate: 1.0f]; // _player.rate = 1.0f;
         }
+        
 
-        _curFrameTimestamp = CMSampleBufferGetPresentationTimeStamp(_cmSampleBuffer);
-    }
 
-    if(CMTimeCompare(_lastFrameTimestamp, _curFrameTimestamp) < 0)
-    {
-        _lastFrameTimestamp = _curFrameTimestamp;
-        size_t w, h;
-        if(_cmSampleBuffer)
-            curTex = CMVideoSampling_SampleBuffer(&_videoSampling, _cmSampleBuffer, &w, &h);
-        _videoSize = CGSizeMake(w, h);
-    }
-
-    return curTex;
+        
+        _curTime = time;
+        while(_reader.status == AVAssetReaderStatusReading && CMTimeCompare(_curFrameTimestamp, _curTime) <= 0)
+        {
+            if(_cmSampleBuffer2)
+                CFRelease(_cmSampleBuffer2);
+            
+            _cmSampleBuffer2 = _cmSampleBuffer;
+            
+            // TODO: properly handle ending
+            
+            _cmSampleBuffer = [_videoOut copyNextSampleBuffer];
+            if(_cmSampleBuffer == 0)
+            {
+                //[self cleanupCVTextureCache];
+                return 0;
+            }
+            
+            _curFrameTimestamp = CMSampleBufferGetPresentationTimeStamp(_cmSampleBuffer);
+        }
+        
+        if(CMTimeCompare(_lastFrameTimestamp, _curFrameTimestamp) < 0)
+        {
+            _lastFrameTimestamp = _curFrameTimestamp;
+            size_t w, h;
+            if(_cmSampleBuffer)
+                curTex = CMVideoSampling_SampleBuffer(&_videoSampling, _cmSampleBuffer, &w, &h);
+            _videoSize = CGSizeMake(w, h);
+        }
+        
+        return curTex;
+        
     }
     
-
+    
     return 0;
 }
 

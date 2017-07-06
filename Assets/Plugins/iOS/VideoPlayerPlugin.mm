@@ -91,6 +91,13 @@ extern "C" __attribute__((visibility ("default"))) NSString *const kUnityViewDid
     
 }
 
+- (void)playloop {
+    m_bFinish = false;
+    
+    [player playToTextureloop];
+    
+}
+
 - (void)unload {
     
   
@@ -111,7 +118,7 @@ extern "C" __attribute__((visibility ("default"))) NSString *const kUnityViewDid
         if( [m_videoURL isFileURL])
         {
             [player seekTo:0.0f];
-            [self play];
+            [self playloop];
         }
         else
         {
@@ -192,6 +199,7 @@ extern "C" void VideoPlayerPluginDestroyInstance(int iID)
         if(_Player[iID]->player)
         {
             [_Player[iID]->player unloadPlayer];
+            [_Player[iID]->player cleanCache];
             //[_Player[iID]->player dealloc];
             _Player[iID]->player  = NULL;
             

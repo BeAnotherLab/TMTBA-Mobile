@@ -106,7 +106,7 @@ public class SeekBarCtrl : MonoBehaviour ,IPointerDownHandler, IPointerUpHandler
 			return;
 		}
 
-		m_srcVideo.SetSeekBarValue (m_srcSlider.value);
+		//m_srcVideo.SetSeekBarValue (m_srcSlider.value);
 		m_fLastSetValue = m_srcSlider.value;
 		m_bActiveDrag = false;
 	

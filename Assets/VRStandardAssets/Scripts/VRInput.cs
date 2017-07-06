@@ -47,6 +47,9 @@ namespace VRStandardAssets.Utils
 		public Text textSent;
 		public Text textRecentered;
 		public Text textButton;
+		public Text textPlayer;
+		public Text textReady;
+		public Text textVideo;
 		int recentered = 0;
 
 		public Text textFPS;
@@ -60,6 +63,7 @@ namespace VRStandardAssets.Utils
 		const string recenter = "/test2";
 		const string path = "/test3";
 		const string pause = "/test4";
+		const string FPS = "/test5";
 
         [SerializeField] private float m_DoubleClickTime = 0.2f;    //The max time allowed between double clicks
         [SerializeField] private float m_SwipeWidth = 0.995f;         //The width of a swipe
@@ -73,30 +77,30 @@ namespace VRStandardAssets.Utils
         public float DoubleClickTime{ get { return m_DoubleClickTime; } }
 
 		private void Start() {
-			//click = GetComponent(typeof(Play)) as Play;
-			//doubleclick = GetComponent (typeof(Stop)) as Stop;
-
 			media.enabled = true;
 
 			CameraLeft = GameObject.Find ("Main Camera Left");
 			CameraRight = GameObject.Find ("Main Camera Right");
 
-
-			if (PlayerPrefs.GetInt ("Assistente") == 1) {
-				OnDoubleClick += VRInput_OnDoubleClick;
+			if (PlayerPrefs.GetInt ("Manager") == 1) {
+				textVideo.text += PlayerPrefs.GetString ("Video");
 			} else {
-				OnClick += VRInput_OnClick;
+				OnSwipe += HandleSwipe;
 			}
-			OnSwipe += HandleSwipe;
 
 			initOSC();
 
-			if (PlayerPrefs.GetInt("Assistente") == 1) {
+
+			if (PlayerPrefs.GetInt ("Manager") == 1) {
 				String file;
 				file = PlayerPrefs.GetString ("Video");
-				oscOut.Send( path, file );
+				oscOut.Send (path, file);
 				textSent.text = "Sent: " + file;
+			} else {
+				textReady.text = "READY";
+				textReady.enabled = true;
 			}
+			
 		}
 
 		private void initOSC (){
@@ -109,12 +113,20 @@ namespace VRStandardAssets.Utils
 			oscIn.Map (pause, OnPauseReceived);
 			oscIn.Map (path, OnPathReceived);
 			oscIn.Map (recenter, OnRecenterReceived);
+			oscIn.Map (FPS, OnFPSReceived);
 
-			if (PlayerPrefs.GetInt ("Assistente") == 1) {
+			if (PlayerPrefs.GetInt ("Manager") == 1) {
 				oscIn.Unmap (OnPathReceived);
 				oscIn.Unmap (OnRecenterReceived);
+				oscIn.Unmap (OnMessageReceived);
 			}
+		}
 
+		void OnFPSReceived (OscMessage message) {
+			String value;
+
+			if (message.TryGet (0, out value)) 
+				textFPS.text = "FPS: " + value;
 		}
 
 		void OnMessageReceived (OscMessage message) {
@@ -123,10 +135,12 @@ namespace VRStandardAssets.Utils
 				textReceived.text = "Received: " + value.ToString();
 				if (value == 1.0f) {
 					media.Play ();
+					textReady.enabled = false;
 					playing = true;
 				}
 				if (value == 0.0f) {
 					media.Stop ();
+					textReady.enabled = false;
 					playing = false;
 				}
 			}
@@ -139,10 +153,9 @@ namespace VRStandardAssets.Utils
 		}
 
 		void Recenter () {
-			//Sphere.transform.rotation = Head.transform.rotation * new Quaternion (0.0f, -170.0f, -180.0f, 0.0f);
-			Sphere.transform.rotation = Quaternion.Euler(99.0f, -Head.transform.localEulerAngles.y, -180.0f);
-			rotacaoOriginal = Quaternion.Euler(99.0f, -Head.transform.localEulerAngles.y, -180.0f);
-			//posicaoOriginal = Sphere.transform.position;
+			/* Semisphere */
+			Sphere.transform.rotation = Quaternion.Euler(90.0f, -Head.transform.localEulerAngles.y, -180.0f);
+			rotacaoOriginal = Quaternion.Euler(90.0f, -Head.transform.localEulerAngles.y, -180.0f);
 		}
 
 		void OnPathReceived (OscMessage message3) {
@@ -152,7 +165,7 @@ namespace VRStandardAssets.Utils
 				PlayerPrefs.SetString ("Video", value);
 				textReceived.text = "Received: " + value;
 			}
-			Application.LoadLevel ("PlayerUsuario");
+			Application.LoadLevel ("UserPlayer");
 		}
 
 		void OnPauseReceived (OscMessage message4) {
@@ -163,11 +176,13 @@ namespace VRStandardAssets.Utils
 					media.Play ();
 					playing = true;
 					textButton.text = "Pause";
+					textReady.enabled = false;
 				}
 				if (value == 0.0f) {
 					media.Pause ();
 					playing = false;
 					textButton.text = "Play";
+					textReady.enabled = false;
 				}
 			}
 		}
@@ -177,12 +192,14 @@ namespace VRStandardAssets.Utils
 				oscOut.Send( pause, 0.0f );
 				media.Pause ();
 				playing = false;
+				textButton.text = "Play";
 				textSent.text = "Sent: 0";
 			}
 			else if (!playing) {
 				oscOut.Send( pause, 1.0f );
 				media.Play ();
 				playing = true;
+				textButton.text = "Pause";
 				textSent.text = "Sent: 1";
 			}
 		}
@@ -201,38 +218,26 @@ namespace VRStandardAssets.Utils
 			case VRInput.SwipeDirection.NONE:
 				break;
 			case VRInput.SwipeDirection.UP:
-				//Subir ();
 				break;
 			case VRInput.SwipeDirection.DOWN:
-				//Descer ();
 				break;
 			case VRInput.SwipeDirection.LEFT:
-				Afastar ();
+				Separate ();
 				break;
 			case VRInput.SwipeDirection.RIGHT:
-				Aproximar ();
+				Approach ();
 				break;
 			}
 		}
 
-		void Afastar () {
+		void Separate () {
 			CameraLeft.transform.localPosition = CameraLeft.transform.localPosition + new Vector3(-5.0f, 0.0f, 0.0f);
 			CameraRight.transform.localPosition = CameraRight.transform.localPosition + new Vector3(5.0f, 0.0f, 0.0f);
 		}
 
-		void Aproximar () {
+		void Approach () {
 			CameraLeft.transform.localPosition = CameraLeft.transform.localPosition + new Vector3(5.0f, 0.0f, 0.0f);
 			CameraRight.transform.localPosition = CameraRight.transform.localPosition + new Vector3(-5.0f, 0.0f, 0.0f);
-		}
-
-		void Subir() {
-			CameraLeft.transform.position = CameraLeft.transform.position + new Vector3(0.0f, 5.0f, 0.0f);
-			CameraRight.transform.position = CameraRight.transform.position + new Vector3(0.0f, -5.0f, 0.0f);
-		}
-
-		void Descer() {
-			CameraLeft.transform.position = CameraLeft.transform.position + new Vector3(0.0f, -5.0f, 0.0f);
-			CameraRight.transform.position = CameraRight.transform.position + new Vector3(0.0f, 5.0f, 0.0f);
 		}
 
 		void VRInput_OnClick ()
@@ -249,37 +254,41 @@ namespace VRStandardAssets.Utils
 				oscOut.Send( play, 0.0f );
 				media.Stop ();
 				playing = false;
-				textSent.text = "Sent: 0";
+				textSent.text = "Sent: Pause";
 			}
 			else if (!playing) {
 				oscOut.Send( play, 1.0f );
 				media.Play ();
 				playing = true;
-				textSent.text = "Sent: 1";
-				//Recenter ();
-				//recentered++;
+				textSent.text = "Sent: Play";
+				Calibrar ();
 				textRecentered.text = "Recentered: " + recentered.ToString();
 			}
 		}
 
         private void Update()
         {
-			deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-			float msec = deltaTime * 1000.0f;
-			float fps = 1.0f / deltaTime;
-			string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
-			textFPS.text = "FPS: " + text;
-
+			if (PlayerPrefs.GetInt ("Manager") == 1) {
+			} else {
+				deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+				float msec = deltaTime * 1000.0f;
+				float fps = 1.0f / deltaTime;
+				String text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
+				oscOut.Send(FPS, text);
+			}
+				
             CheckInput();
 			Sphere.transform.rotation = rotacaoOriginal;
-			//Sphere.transform.position = posicaoOriginal;
-			textPlay.text = "Playing: " + playing.ToString();
+
+			//textPlay.text = "Playing: " + playing.ToString();
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {
-				if (PlayerPrefs.GetInt ("Assistente") == 1) {
+				if (PlayerPrefs.GetInt ("Manager") == 1) {
 					PlayerPrefs.DeleteAll ();
-					Application.LoadLevel ("EscolhaDeVideo");
+					Application.LoadLevel ("ChooseVideo");
 				} else {
+					PlayerPrefs.DeleteKey ("Video");
+					PlayerPrefs.DeleteKey ("Manager");
 					PlayerPrefs.DeleteAll ();
 					Application.Quit ();
 				}
@@ -328,27 +337,6 @@ namespace VRStandardAssets.Utils
                     OnUp();
 
 				StartCoroutine (ClickEvent ());
-
-				/*
-                // If the time between the last release of Fire1 and now is less
-                // than the allowed double click time then it's a double click.
-				if (Time.time - m_LastMouseUpTime < m_DoubleClickTime)
-                {
-                    // If anything has subscribed to OnDoubleClick call it.
-                    if (OnDoubleClick != null)
-                        OnDoubleClick();
-                }
-				else
-                {
-                    // If it's not a double click, it's a single click.
-                    // If anything has subscribed to OnClick call it.
-                    if (OnClick != null)
-                        OnClick();
-                }
-
-                // Record the time when Fire1 is released.
-                m_LastMouseUpTime = Time.time;
-				*/
             }
 
 
@@ -462,7 +450,6 @@ namespace VRStandardAssets.Utils
             OnDoubleClick = null;
             OnDown = null;
             OnUp = null;
-			PlayerPrefs.DeleteAll ();
         }
     }
 }

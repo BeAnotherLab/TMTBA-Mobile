@@ -21,9 +21,25 @@ EditorBuildSettings:
     path: Assets/EasyMovieTexture/Scene/Demo_Sphere.unity
   - enabled: 0
     path: Assets/OSC simpl/Examples/07 Broadcast/UsingBroadcast.unity
-  - enabled: 0
-    path: Assets/EasyMovieTexture/Scene/EscolhaDeVideo.unity
   - enabled: 1
-    path: Assets/EasyMovieTexture/Scene/PlayerUsuario.unity
+    path: Assets/EasyMovieTexture/Scene/ChooseVideo.unity
   - enabled: 0
-    path: Assets/EasyMovieTexture/Scene/PlayerAssistente.unity
+    path: Assets/EasyMovieTexture/Scene/EscolhaMonoStereo.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/UserPlayer.unity
+  - enabled: 1
+    path: Assets/EasyMovieTexture/Scene/ManagerPlayer.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/PlayerUsuarioEsfera.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/PlayerUsuarioStereo.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/PlayerUsuario360.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/PlayerUsuarioStereo2.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/PlayerUsuarioStereoEsfera.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/EscolhaDeCamera.unity
+  - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/PlayerUsuarioWebcam.unity

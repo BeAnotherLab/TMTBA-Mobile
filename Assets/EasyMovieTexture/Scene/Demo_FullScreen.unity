@@ -226,11 +226,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb521e9ace49d8546a83f420a0debd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textRecentered: {fileID: 0}
   m_strFileName: ed_1024_512kb.mp4
   m_TargetMaterial:
   - {fileID: 1004722631}
+  m_CurrentState: 0
   m_bFullScreen: 1
   m_bSupportRockchip: 1
+  textPlayer2: {fileID: 0}
   m_ScaleValue: 0
   m_objResize:
   - {fileID: 1004722631}

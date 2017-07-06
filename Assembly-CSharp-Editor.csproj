@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2E935686-D70D-3368-F427-B1A02904ABF0}</ProjectGuid>
+    <ProjectGuid>{DCA37DF7-9FA0-FA75-A408-716714FBCD03}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -53,6 +53,7 @@
      <Compile Include="Assets\Cardboard\Editor\CardboardMenu.cs" />
      <Compile Include="Assets\Cardboard\Editor\CardboardSetup.cs" />
      <Compile Include="Assets\Cardboard\Editor\StereoControllerEditor.cs" />
+     <Compile Include="Assets\EasyMovieTexture\Editor\CSProjectFilePostProcessor.cs" />
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
      <Compile Include="Assets\OSC simpl\Base\Internal\Editor\OscInInspector.cs" />
      <Compile Include="Assets\OSC simpl\Base\Internal\Editor\OscMappingDrawer.cs" />
@@ -62,6 +63,7 @@
      <None Include="Assets\EasyMovieTexture\Unlit_SphereInside.shader" />
      <None Include="Assets\Cardboard\Resources\UnlitTexture.shader" />
      <None Include="Assets\EasyMovieTexture\Chromakey.shader" />
+     <None Include="Assets\EasyMovieTexture\Resources\Unlit_YUV.shader" />
      <None Include="Assets\Plugins\Android\assets\OSIG_Readme.txt" />
      <None Include="Assets\EasyMovieTexture\readme.txt" />
      <None Include="Assets\NewUnlitShader.shader" />
@@ -106,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{84D7114D-0912-0966-B575-D4F77577BAAD}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{956F22CD-660F-F6B2-86C0-E12D9A153F7F}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

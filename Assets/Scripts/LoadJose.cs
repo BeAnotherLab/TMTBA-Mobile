@@ -14,11 +14,12 @@ public class LoadJose : MonoBehaviour {
 	}
 
 	public void Load () {
-		PlayerPrefs.SetString ("Video", "file:///storage/emulated/0/Download/FLUPP_JOSE_edition_1080p.mkv");
-		//PlayerPrefs.SetString ("Video", "file:///storage/emulated/0/Planchado360_injected.mp4");
-		//PlayerPrefs.SetString ("Video2", "FLUPP_JOSE_edition_1080p.mkv");
+		//PlayerPrefs.SetString ("VideoUsuario", "file:///storage/emulated/0/FLUPP_JOSE_edition_4K.mkv");
+		//PlayerPrefs.SetString ("Video", "file:///storage/sdcard0/FLUPP_JOSE_edition_4K.mp4");
+
+		PlayerPrefs.SetString ("Video", "Jose");
+
 		PlayerPrefs.SetInt("Assistente", 1);
-		//PlayerPrefs.SetInt ("Desktop", 1);
 		Application.LoadLevel ("PlayerAssistente");
 	}
 }

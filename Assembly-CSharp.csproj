@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
-    <ProjectGuid>{84D7114D-0912-0966-B575-D4F77577BAAD}</ProjectGuid>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectGuid>{956F22CD-660F-F6B2-86C0-E12D9A153F7F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -23,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -45,111 +48,114 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudio.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudioListener.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudioRoom.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudioSource.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\Cardboard.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\CardboardEye.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\CardboardHead.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\CardboardPostRender.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\CardboardPreRender.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\CardboardProfile.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\GazeInputModule.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\Pose3D.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\StereoController.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\StereoRenderEffect.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\UI\CardboardGaze.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\UI\CardboardReticle.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\UI\ICardboardGazePointer.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\UI\ICardboardGazeResponder.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\VRDevices\BaseAndroidDevice.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\VRDevices\BaseCardboardDevice.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\VRDevices\BaseVRDevice.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\VRDevices\CardboardAndroidDevice.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\VRDevices\CardboardiOSDevice.cs" />
-     <Compile Include="Assets\Cardboard\Scripts\VRDevices\UnityEditorDevice.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avcodec.g.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avdevice.g.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avfilter.g.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avformat.g.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avutil.g.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.swresample.g.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.swscale.g.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\Properties\AssemblyInfo.cs" />
-     <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\Unresolved.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\Communication.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\MedaiPlayerSampleGUI.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\MedaiPlayerSampleSphereGUI.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\MediaPlayerCtrl.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\MediaPlayerFullScreenCtrl.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\SeekBarCtrl.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\SphereMirror.cs" />
-     <Compile Include="Assets\EasyMovieTexture\Scripts\VideoCopyTexture.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscBlobEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscBoolEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscCharEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscColorEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscDoubleEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscFloatEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscIntEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscLongEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscMessageEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscStringEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscTimeTagEvent.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\OscHelper.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\OscMapping.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\OscMessageType.cs" />
-     <Compile Include="Assets\OSC simpl\Base\Internal\OscPacket.cs" />
-     <Compile Include="Assets\OSC simpl\Base\OscBundle.cs" />
-     <Compile Include="Assets\OSC simpl\Base\OscImpulse.cs" />
-     <Compile Include="Assets\OSC simpl\Base\OscMessage.cs" />
-     <Compile Include="Assets\OSC simpl\Base\OscReceiveMode.cs" />
-     <Compile Include="Assets\OSC simpl\Base\OscRemoteStatus.cs" />
-     <Compile Include="Assets\OSC simpl\Base\OscSendMode.cs" />
-     <Compile Include="Assets\OSC simpl\Base\OscTimeTag.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\01 GettingStarted\GettingStartedReceiving.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\01 GettingStarted\GettingStartedSending.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\02 ArgumentTypes\ArgumentTypeTest.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\03 RuntimeUI\Scripts\OscInRuntimeUI.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\03 RuntimeUI\Scripts\OscOutRuntimeUI.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\03 RuntimeUI\Scripts\TestMessageGenerator.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\04 Bundles\UsingBundles.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\05 TimeTags\UsingTimeTags.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\06 Unicast\UsingUnicast.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\07 Broadcast\UsingBroadcast.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\07 Broadcast\evento.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\08 Multicast\UsingMulticast.cs" />
-     <Compile Include="Assets\OSC simpl\Examples\09 Optimisations\Optimisations.cs" />
-     <Compile Include="Assets\OSC simpl\OscIn.cs" />
-     <Compile Include="Assets\OSC simpl\OscOut.cs" />
-     <Compile Include="Assets\Scripts\Controle.cs" />
-     <Compile Include="Assets\Scripts\LoadDalva.cs" />
-     <Compile Include="Assets\Scripts\LoadJose.cs" />
-     <Compile Include="Assets\Scripts\UDPPacketIO.cs" />
-     <Compile Include="Assets\Scripts\fps.cs" />
-     <Compile Include="Assets\VRStandardAssets\Scripts\VRInput.cs" />
-     <Compile Include="Assets\VRStandardAssets\Scripts\VRInteractiveItem.cs" />
-     <Compile Include="Assets\VRStandardAssets\Scripts\VRTrackingReset.cs" />
-     <None Include="Assets\OSC simpl\Documents\Versions.txt" />
-     <None Include="Assets\Cardboard\Distortion\CardboardDistortion.cginc" />
-     <None Include="Assets\EasyMovieTexture\Unlit_SphereInside.shader" />
-     <None Include="Assets\Cardboard\Resources\UnlitTexture.shader" />
-     <None Include="Assets\EasyMovieTexture\Chromakey.shader" />
-     <None Include="Assets\Plugins\Android\assets\OSIG_Readme.txt" />
-     <None Include="Assets\EasyMovieTexture\readme.txt" />
-     <None Include="Assets\NewUnlitShader.shader" />
-     <None Include="Assets\EasyMovieTexture\Chromakey2.shader" />
-     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
-     <None Include="Assets\EasyMovieTexture\readme_License.txt" />
-     <None Include="Assets\Cardboard\Resources\UI\CardboardReticleShader.shader" />
-     <None Include="Assets\Cardboard\Resources\SolidColor.shader" />
- <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudio.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudioListener.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudioRoom.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\Audio\CardboardAudioSource.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\Cardboard.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\CardboardEye.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\CardboardHead.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\CardboardPostRender.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\CardboardPreRender.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\CardboardProfile.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\GazeInputModule.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\Pose3D.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\StereoController.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\StereoRenderEffect.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\UI\CardboardGaze.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\UI\CardboardReticle.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\UI\ICardboardGazePointer.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\UI\ICardboardGazeResponder.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\VRDevices\BaseAndroidDevice.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\VRDevices\BaseCardboardDevice.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\VRDevices\BaseVRDevice.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\VRDevices\CardboardAndroidDevice.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\VRDevices\CardboardiOSDevice.cs" />
+    <Compile Include="Assets\Cardboard\Scripts\VRDevices\UnityEditorDevice.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avcodec.g.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avdevice.g.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avfilter.g.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avformat.g.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.avutil.g.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.swresample.g.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\FFmpeg.swscale.g.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\Properties\AssemblyInfo.cs" />
+    <Compile Include="Assets\EasyMovieTexture\FFmpeg.AutoGen\Unresolved.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\Communication.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\MedaiPlayerSampleGUI.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\MedaiPlayerSampleSphereGUI.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\MediaPlayerCtrl.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\MediaPlayerEvent.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\MediaPlayerFullScreenCtrl.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\SeekBarCtrl.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\SphereMirror.cs" />
+    <Compile Include="Assets\EasyMovieTexture\Scripts\VideoCopyTexture.cs" />
+    <Compile Include="Assets\LoadStart.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscBlobEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscBoolEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscCharEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscColorEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscDoubleEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscFloatEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscIntEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscLongEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscMessageEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscStringEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\Events\OscTimeTagEvent.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\OscHelper.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\OscMapping.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\OscMessageType.cs" />
+    <Compile Include="Assets\OSC simpl\Base\Internal\OscPacket.cs" />
+    <Compile Include="Assets\OSC simpl\Base\OscBundle.cs" />
+    <Compile Include="Assets\OSC simpl\Base\OscImpulse.cs" />
+    <Compile Include="Assets\OSC simpl\Base\OscMessage.cs" />
+    <Compile Include="Assets\OSC simpl\Base\OscReceiveMode.cs" />
+    <Compile Include="Assets\OSC simpl\Base\OscRemoteStatus.cs" />
+    <Compile Include="Assets\OSC simpl\Base\OscSendMode.cs" />
+    <Compile Include="Assets\OSC simpl\Base\OscTimeTag.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\01 GettingStarted\GettingStartedReceiving.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\01 GettingStarted\GettingStartedSending.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\02 ArgumentTypes\ArgumentTypeTest.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\03 RuntimeUI\Scripts\OscInRuntimeUI.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\03 RuntimeUI\Scripts\OscOutRuntimeUI.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\03 RuntimeUI\Scripts\TestMessageGenerator.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\04 Bundles\UsingBundles.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\05 TimeTags\UsingTimeTags.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\06 Unicast\UsingUnicast.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\07 Broadcast\UsingBroadcast.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\07 Broadcast\evento.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\08 Multicast\UsingMulticast.cs" />
+    <Compile Include="Assets\OSC simpl\Examples\09 Optimisations\Optimisations.cs" />
+    <Compile Include="Assets\OSC simpl\OscIn.cs" />
+    <Compile Include="Assets\OSC simpl\OscOut.cs" />
+    <Compile Include="Assets\Scripts\Controle.cs" />
+    <Compile Include="Assets\Scripts\LoadDalva.cs" />
+    <Compile Include="Assets\Scripts\LoadJose.cs" />
+    <Compile Include="Assets\Scripts\UDPPacketIO.cs" />
+    <Compile Include="Assets\Scripts\fps.cs" />
+    <Compile Include="Assets\VRStandardAssets\Scripts\VRInput.cs" />
+    <Compile Include="Assets\VRStandardAssets\Scripts\VRInteractiveItem.cs" />
+    <Compile Include="Assets\VRStandardAssets\Scripts\VRTrackingReset.cs" />
+    <None Include="Assets\OSC simpl\Documents\Versions.txt" />
+    <None Include="Assets\Cardboard\Distortion\CardboardDistortion.cginc" />
+    <None Include="Assets\EasyMovieTexture\Unlit_SphereInside.shader" />
+    <None Include="Assets\Cardboard\Resources\UnlitTexture.shader" />
+    <None Include="Assets\EasyMovieTexture\Chromakey.shader" />
+    <None Include="Assets\EasyMovieTexture\Resources\Unlit_YUV.shader" />
+    <None Include="Assets\Plugins\Android\assets\OSIG_Readme.txt" />
+    <None Include="Assets\EasyMovieTexture\readme.txt" />
+    <None Include="Assets\NewUnlitShader.shader" />
+    <None Include="Assets\EasyMovieTexture\Chromakey2.shader" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\EasyMovieTexture\readme_License.txt" />
+    <None Include="Assets\Cardboard\Resources\UI\CardboardReticleShader.shader" />
+    <None Include="Assets\Cardboard\Resources\SolidColor.shader" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -159,5 +165,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

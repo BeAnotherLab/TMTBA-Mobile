@@ -78,11 +78,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb521e9ace49d8546a83f420a0debd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textRecentered: {fileID: 0}
   m_strFileName: EasyMovieTexture.mp4
   m_TargetMaterial:
   - {fileID: 100000}
-  m_bFullScreen: 1
+  m_CurrentState: 0
+  m_bFullScreen: 0
   m_bSupportRockchip: 1
+  textPlayer2: {fileID: 0}
   m_ScaleValue: 0
   m_objResize:
   - {fileID: 100000}
@@ -95,7 +98,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_shaderYUV
+      value: 
+      objectReference: {fileID: 4800000, guid: 54493a551624d5542824b34bfa16722c, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
