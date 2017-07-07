@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/EasyMovieTexture/Scene/ManagerPlayer.unity
+- path: Assets/EasyMovieTexture/Scene/ChooseVideo.unity
   isLoaded: 1
   isActive: 1

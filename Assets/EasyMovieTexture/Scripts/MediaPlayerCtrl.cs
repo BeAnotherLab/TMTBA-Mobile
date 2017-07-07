@@ -232,10 +232,6 @@ public class MediaPlayerCtrl : MonoBehaviour
 
 		/* Path to Android root directory */
 		m_strFileName = "file:///storage/emulated/0/" + PlayerPrefs.GetString("Video");
-
-		/* Caminha para diretório Android
-		m_strFileName = "file:///storage/sdcard0/DalvaDemo.mp4";
-		*/
 		 
 	#if UNITY_IPHONE  || UNITY_TVOS || UNITY_EDITOR || UNITY_STANDALONE
 

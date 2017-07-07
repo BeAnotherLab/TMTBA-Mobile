@@ -284,11 +284,8 @@ namespace VRStandardAssets.Utils
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				if (PlayerPrefs.GetInt ("Manager") == 1) {
-					PlayerPrefs.DeleteAll ();
 					Application.LoadLevel ("ChooseVideo");
 				} else {
-					PlayerPrefs.DeleteKey ("Video");
-					PlayerPrefs.DeleteKey ("Manager");
 					PlayerPrefs.DeleteAll ();
 					Application.Quit ();
 				}

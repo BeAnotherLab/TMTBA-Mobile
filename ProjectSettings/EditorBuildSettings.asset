@@ -21,13 +21,13 @@ EditorBuildSettings:
     path: Assets/EasyMovieTexture/Scene/Demo_Sphere.unity
   - enabled: 0
     path: Assets/OSC simpl/Examples/07 Broadcast/UsingBroadcast.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/EasyMovieTexture/Scene/ChooseVideo.unity
   - enabled: 0
     path: Assets/EasyMovieTexture/Scene/EscolhaMonoStereo.unity
-  - enabled: 1
-    path: Assets/EasyMovieTexture/Scene/UserPlayer.unity
   - enabled: 0
+    path: Assets/EasyMovieTexture/Scene/UserPlayer.unity
+  - enabled: 1
     path: Assets/EasyMovieTexture/Scene/ManagerPlayer.unity
   - enabled: 0
     path: Assets/EasyMovieTexture/Scene/PlayerUsuarioEsfera.unity
