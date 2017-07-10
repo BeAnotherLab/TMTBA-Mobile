@@ -11,7 +11,6 @@ public class LoadStart : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		Vector3 pos = start.transform.position;
 		pos.x = (Screen.width / 2);
 		pos.y = (Screen.height * 1/11);
@@ -24,27 +23,27 @@ public class LoadStart : MonoBehaviour {
 		pos.y = (Screen.height * 1/1.2f);
 		videoDropDown.transform.position = pos;
 		videoDropDown.image.rectTransform.sizeDelta = size;
-
+			
+	
 		try {
 			DirectoryInfo dir = new DirectoryInfo(GetAndroidPath());
+			List<FileInfo> infoList = new List<FileInfo>();
+
 			FileInfo[] info = dir.GetFiles("*.mp4");
-
-			foreach (FileInfo f in info) {
-				videoDropDown.options.Add (new Dropdown.OptionData {text=f.ToString()});
-			}
-
+			infoList.AddRange(info);
 			info = dir.GetFiles("*.mkv");
+			infoList.AddRange(info);
 
-			foreach (FileInfo f in info) {
+			infoList.ToArray ();
+
+			foreach (FileInfo f in infoList) {
 				videoDropDown.options.Add (new Dropdown.OptionData {text=f.ToString()});
 			}
 
-			if (info.Length == 0) {
-				videoDropDown.captionText.text = "No videos were found at " + GetAndroidPath() + ".";
-			}
+			videoDropDown.captionText.text = "Select a video: " + videoDropDown.options [videoDropDown.value].text;
 		}
-		catch (Exception e) {
-			videoDropDown.captionText.text = "Couldn't get path to Android's directory.";
+		catch (ArgumentException e) {
+			videoDropDown.captionText.text = "No videos were found at " + GetAndroidPath() + ".";
 		}
 	}
 
@@ -54,20 +53,25 @@ public class LoadStart : MonoBehaviour {
 		try {
 			AndroidJavaClass jc = new AndroidJavaClass("android.os.Environment");
 			path = jc.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath");
-			videoDropDown.captionText.text = "Select a video";
 			return path;
 		}
 		catch (Exception e) {
-			return path;
+			videoDropDown.captionText.text = "Couldn't get path to Android's directory.";
+			return null;
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (videoDropDown.captionText.Equals("Select a video")) {
+		int index = videoDropDown.value;
+		List<Dropdown.OptionData> options = videoDropDown.options;
+	
+		if (options[index].text == "Select a video" || videoDropDown.captionText.text.Equals( "No videos were found at " + GetAndroidPath() + ".") || options[index].text == "Couldn't get path to Android's directory.") {
 			start.interactable = false;
+			start.enabled = false;
 		} else {
 			start.interactable = true;
+			start.enabled = true;
 		}
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {

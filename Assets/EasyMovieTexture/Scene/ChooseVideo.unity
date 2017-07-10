@@ -1257,7 +1257,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: {fileID: 1802369023}
-  videos: {fileID: 0}
   videoDropDown: {fileID: 1877979229}
 --- !u!1 &1877979227
 GameObject:
