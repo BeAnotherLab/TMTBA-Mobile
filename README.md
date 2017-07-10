@@ -5,7 +5,7 @@ Install the ManagerPlayer.apk located at /Builds.
 
 Connect to the same Wi-Fi network that the User Player is connected to.
 
-Insert the video file name in the text box on the first screen the app has started. The video file must be in the internal storage of the phone.
+Select a video from the drop-down list on the first screen the app has started. The video file must be in the internal storage of the phone.
 
 Wait for the User Player to load and click the Start button only when "READY" is written on the user screen.
 
