@@ -53,6 +53,7 @@ public class LoadStart : MonoBehaviour {
 		try {
 			AndroidJavaClass jc = new AndroidJavaClass("android.os.Environment");
 			path = jc.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath");
+			PlayerPrefs.SetString ("Path", path);
 			return path;
 		}
 		catch (Exception e) {

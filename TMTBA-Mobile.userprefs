@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LoadStart.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VRStandardAssets\Scripts\VRInput.cs">
     <Files>
-      <File FileName="Assets\VRStandardAssets\Scripts\VRInput.cs" Line="34" Column="32" />
-      <File FileName="Assets\LoadStart.cs" Line="58" Column="3" />
-      <File FileName="Assets\EasyMovieTexture\Scripts\MediaPlayerCtrl.cs" Line="234" Column="48" />
+      <File FileName="Assets\VRStandardAssets\Scripts\VRInput.cs" Line="138" Column="3" />
+      <File FileName="Assets\LoadStart.cs" Line="5" Column="1" />
+      <File FileName="Assets\EasyMovieTexture\Scripts\MediaPlayerCtrl.cs" Line="234" Column="73" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

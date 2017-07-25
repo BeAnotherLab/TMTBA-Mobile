@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VR;
+using System.IO;
 using System.Collections;
 
 namespace VRStandardAssets.Utils
@@ -77,8 +78,6 @@ namespace VRStandardAssets.Utils
         public float DoubleClickTime{ get { return m_DoubleClickTime; } }
 
 		private void Start() {
-			media.enabled = true;
-
 			CameraLeft = GameObject.Find ("Main Camera Left");
 			CameraRight = GameObject.Find ("Main Camera Right");
 
@@ -86,6 +85,7 @@ namespace VRStandardAssets.Utils
 				textVideo.text += PlayerPrefs.GetString ("Video");
 			} else {
 				OnSwipe += HandleSwipe;
+				SetAndroidPath ();
 			}
 
 			initOSC();
@@ -100,7 +100,21 @@ namespace VRStandardAssets.Utils
 				textReady.text = "READY";
 				textReady.enabled = true;
 			}
-			
+
+			media.enabled = true;
+
+		}
+
+		public void SetAndroidPath() {
+			string path = "";
+
+			try {
+				AndroidJavaClass jc = new AndroidJavaClass("android.os.Environment");
+				path = jc.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath");
+				PlayerPrefs.SetString ("Path", path);
+			}
+			catch (Exception e) {
+			}
 		}
 
 		private void initOSC (){

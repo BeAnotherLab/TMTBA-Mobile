@@ -231,7 +231,7 @@ public class MediaPlayerCtrl : MonoBehaviour
 		}
 
 		/* Path to Android root directory */
-		m_strFileName = "file:///storage/emulated/0/" + PlayerPrefs.GetString("Video");
+		m_strFileName = "file://" + PlayerPrefs.GetString("Path") + "/" + PlayerPrefs.GetString("Video");
 		 
 	#if UNITY_IPHONE  || UNITY_TVOS || UNITY_EDITOR || UNITY_STANDALONE
 
